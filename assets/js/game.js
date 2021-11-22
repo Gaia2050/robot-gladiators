@@ -7,11 +7,31 @@ var randomNumber = function (min, max) {
   return value;
 };
 
-// fight function (now with parameter for enemy's object holding name, health, and attack values)
+var fightOrSkip = function() {
+  promptFight = promptFight.toLowerCase();
+
+  if (promptFight === "skip") {
+    // // conditional recursive function call
+    if (promptFight === "" || promptFight === null) {
+      window.alert("You need to enter a valid answer! Please try again.");
+      return fightOrSkip(false);
+    }
+  }
+}
+
+
+//  fight function (now with parameter for enemy's object holding name, health, and attack values)
 var fight = function (enemy) {
-  while (playerInfo.health > 0 && enemy.health > 0) {
+// var fightOrSkip = function() { 
+while (playerInfo.health > 0 && enemy.health > 0) {
+    //ask player if they want to fight or skip using the fightOrSKip function
+    // if (fightOrSkip()) {
+      //if true, leave fight by breaking loop
+      // break;
+    // }
     // ask player if they'd like to fight or run
     var promptFight = window.prompt('Would you like to FIGHT or SKIP this battle? Enter "FIGHT" or "SKIP" to choose.');
+
 
     // if player picks "skip" confirm and then stop the loop
     if (promptFight === "skip" || promptFight === "SKIP") {
@@ -24,9 +44,11 @@ var fight = function (enemy) {
         // subtract money from playerInfo.money for skipping
         playerInfo.money = Math.max(0, playerInfo.money - 10);
         console.log("playerInfo.money", playerInfo.money)
+        return true;
         break;
       }
     }
+  
 
     // generate random damage value based on player's attack power
     var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
@@ -174,13 +196,12 @@ var getPlayerName = function () {
   var name = "";
   while (name === "" || name === null) {
     name = prompt("what is your robot's name?");
-    console.log("Your robot's name is " + name);
-  };
-}
+console.log("Your robot's name is " + name);
+  }
+};
 // player information
 var playerInfo = {
   name: getPlayerName(),
-  name: window.prompt("What is your robot's name?"),
   health: 100,
   attack: 10,
   money: 10,
