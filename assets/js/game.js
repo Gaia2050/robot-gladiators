@@ -70,6 +70,13 @@ var fight = function(enemy) {
 };
 
 // function to start a new game
+var getPlayerName = function() {
+  var name = "";
+  while (name === "" || name === null) {
+    name = prompt("what is your robot's name?");
+    console.log("Your robot's name is " + name);
+    };
+}
 var startGame = function() {
   // reset player stats
   playerInfo.reset();
