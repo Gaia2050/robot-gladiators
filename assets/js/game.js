@@ -351,7 +351,7 @@ var playerInfo = {
 // enemy information
 var enemyInfo = [
   {
-    name: 'Gaia Galatic',
+    name: 'Gaia Galactic',
     attack: randomNumber(10, 14)
   },
   {
