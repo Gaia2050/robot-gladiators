@@ -1,7 +1,7 @@
 /* GAME FUNCTIONS */
 
 // function to generate a random numeric value
-var randomNumber = function (min, max) {
+var randomNumber = function(min, max) {
   var value = Math.floor(Math.random() * (max - min + 1) + min);
   return value;
 };
@@ -25,6 +25,11 @@ var fightOrSkip = function () {
     var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
 
 
+// fight function (now with parameter for enemy's object holding name, health, and attack values)
+var fight = function(enemy) {
+  while (playerInfo.health > 0 && enemy.health > 0) {
+    // ask player if they'd like to fight or run
+    var promptFight = window.prompt('Would you like to FIGHT or SKIP this battle? Enter "FIGHT" or "SKIP" to choose.');
 
     // if player picks "skip" confirm and then stop the loop
     if (promptFight === "skip" || promptFight === "SKIP") {
@@ -74,6 +79,11 @@ var fight = function (enemy) {
         //if true, leave fight-breaking loop
         break;
       }
+    playerInfo.health = Math.max(0, playerInfo.health - damage);
+    
+    console.log(
+      enemy.name + ' attacked ' + playerInfo.name + '. ' + playerInfo.name + ' now has ' + playerInfo.health + ' health remaining.'
+    );
 
       var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
 
@@ -178,7 +188,7 @@ var fight = function (enemy) {
 
 
 // function to start a new game
-var startGame = function () {
+var startGame = function() {
   // reset player stats
   playerInfo.reset();
 
@@ -202,7 +212,7 @@ var startGame = function () {
       if (playerInfo.health > 0 && i < enemyInfo.length - 1) {
         // ask if player wants to use the store before next round
         var storeConfirm = window.confirm("The fight is over, visit the store before the next round?");
-
+      
         // if yes, take them to the store() function
         if (storeConfirm) {
           shop();
@@ -221,7 +231,7 @@ var startGame = function () {
 };
 
 // function to end the entire game
-var endGame = function () {
+var endGame = function() {
   window.alert("The game has now ended. Let's see how you did!");
 
   // if player is still alive, player wins!
@@ -242,7 +252,7 @@ var endGame = function () {
 };
 
 // go to shop between battles function
-var shop = function () {
+var shop = function() {
   // ask player what they'd like to do
   var shopOptionPrompt = window.prompt(
     'Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter 1 for "REFILL", 2 for "UPGRADE", or 3 for "LEAVE".'
@@ -261,7 +271,7 @@ var shop = function () {
     case 3:
       window.alert('Leaving the store.');
 
-      // do nothing, so function will end
+      // do nothing, so functioSn will end
       break;
     default:
       window.alert('You did not pick a valid option. Try again.');
@@ -305,8 +315,9 @@ var endGame = function() {
 };
 /* GAME INFORMATION / VARIABLES */
 
-//function to set name 
-var getPlayerName = function () {
+
+//function to set name
+var getPlayerName = function() {
   var name = "";
   while (name === "" || name === null) {
     name = prompt("what is your robot's name?");
@@ -319,27 +330,27 @@ var playerInfo = {
   health: 100,
   attack: 10,
   money: 10,
-  reset: function () {
+  reset: function() {
     this.health = 100;
     this.money = 10;
     this.attack = 10;
   },
-  refillHealth: function () {
+  refillHealth: function() {
     if (this.money >= 7) {
       window.alert("Refilling player's health by 20 for 7 dollars.");
       this.health += 20;
       this.money -= 7;
-    }
+    } 
     else {
       window.alert("You don't have enough money!");
     }
   },
-  upgradeAttack: function () {
+  upgradeAttack: function() {
     if (this.money >= 7) {
       window.alert("Upgrading player's attack by 6 for 7 dollars.");
       this.attack += 6;
       this.money -= 7;
-    }
+    } 
     else {
       window.alert("You don't have enough money!");
     }
@@ -349,15 +360,15 @@ var playerInfo = {
 // enemy information
 var enemyInfo = [
   {
-    name: 'Gaia Galatic',
+    name: 'Roborto',
     attack: randomNumber(10, 14)
   },
   {
-    name: 'Andrew Android',
+    name: 'Amy Android',
     attack: randomNumber(10, 14)
   },
   {
-    name: 'David Data',
+    name: 'Robo Trumble',
     attack: randomNumber(10, 14)
   }
 ];
