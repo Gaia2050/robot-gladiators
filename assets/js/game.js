@@ -67,7 +67,7 @@ var fight = function (enemy) {
     isPlayerTurn = false;
   }
 
-  while (playerInfo.health > 0 && enemy, health > 0) {
+  while (playerInfo.health > 0 && enemy.health > 0) {
     if (isPlayerTurn) {
       //ask player if they want to fight or skip w/ fightOrSKip function
       if (fightOrSkip()) {
@@ -125,7 +125,8 @@ var fight = function (enemy) {
         //leave while() loop if player is dead
         break;
       } else {
-        window.alert(playerInfo.name + " stil has " + playerInfo.health + " health left.");
+        console.log(playerInfo)
+        window.alert(playerInfo.name + " still has " + playerInfo.health + " health left.");
       }
 
     }
@@ -311,6 +312,7 @@ var getPlayerName = function () {
   while (name === "" || name === null) {
     name = prompt("what is your robot's name?");
     console.log("Your robot's name is " + name);
+    return name;
   }
 };
 // player information
